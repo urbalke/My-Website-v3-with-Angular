@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+<title>Blog Project</title>
+{% endblock %}
+
+{% block body %}
+<!--Update buttons in CSS-->
+<br>
+<h1>Few words about...</h1>
+
+    <h1>Hey</h1>
+    <p> This is Blog Project! My first ever attempt to use flask, integrated to CV website. <br>
+        This project has separate database, templates, and provides you with ability to simply write down some stuff :)<br>
+        The biggest challenge was to refractor webiste to change structure into modullar one. This project was added third into website.
+    </p>
+        <a class="btn" href="/posts" role="button">Here you can find Blog</a>
+    </p>
+
+{% endblock %}

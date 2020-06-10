@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Piccolo Cloud</title>
+{% endblock head %}
+
+{% block body %}
+
+<h1>Cloud Service:</h1>
+<p>For now you don't have to log in, just testing capabilities of handmade cloud. </p>
+<hr>
+{% for cloud_files in cloud_contents  %}
+    
+
+
+<a href="/cloud/{{cloud_files}}"> 
+
+{{cloud_files}}   
+</a>
+    <a href="/cloud/download/{{cloud_files}}">Download</> 
+    <a href="/cloud/delete/{{cloud_files}}">Delete</a>
+
+    <br><hr>
+{% endfor %}
+<br>
+<br>
+
+
+
+<form method=POST enctype=multipart/form-data action="{{ url_for('piccolo.upload') }}">
+    <input type=file name=file>
+    <input type="submit">
+{% endblock body %}
+
+
+

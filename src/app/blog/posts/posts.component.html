@@ -1,0 +1,32 @@
+
+<br>
+<div>
+    <a routerLink="/blog/posts/new"><button class="btn" style="float: right;" > + New post</button></a>
+    <h1 style="display:inline">All posts currently availaible:</h1><br>
+    
+</div>
+
+
+
+<hr>
+
+
+<div *ngFor="let p of (allPosts$|async).reverse()">
+   <h2> {{p.title}}</h2>
+
+    <div *ngIf="p.author; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock><small>Written by {{ p.author }} on {{ p.date_posted }}</small></ng-template>
+    <ng-template #elseBlock><small> Written by Unknown on {{ p.date_posted }}</small></ng-template>
+    <br>
+    <br>
+    <p style="white-space:pre-wrap">{{ p.content }}</p>
+    <br>
+    <button class="btn-red" (click)="deletePost(p.id)">Delete</button>
+    <button class="btn-green"(click)="getPost(p.id)" routerLink="/blog/posts/edit" >Edit</button>
+    <br>
+    <hr>
+    <br>
+
+
+</div>
+

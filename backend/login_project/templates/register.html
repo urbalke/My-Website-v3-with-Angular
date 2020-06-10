@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title> Register </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+    
+
+
+{% block body %}
+
+<form action="/register" method="post">
+
+  
+    <div class="container">
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" id= "username" name="username" required>
+  
+      <label for="username"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id= "password" name="password" required>
+  
+      <button class="greenloginbtn" type="submit" value="register">Register</button>
+     
+    </div>
+  <div class="container" style="background-color:#f1f1f1">
+   <a href="/login">
+      <button type="button" class="cancelbtn">Cancel</button>
+     </a>
+    </div>
+  </form> 
+
+{% endblock %}

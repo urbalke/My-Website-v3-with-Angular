@@ -1,0 +1,191 @@
+/* HEADER */
+header {
+    background-color: #DBE3E9 ;
+    width: 100%;
+}
+
+header::after{
+    content: "";
+    display: table;
+    clear: both;
+
+}
+
+.logo {
+    float: left;
+    padding: 10px 0;
+}
+
+nav {
+    float:left;
+}
+
+nav ul {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+.nav-links {
+    float: right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  
+}
+.nav-links ul {
+    list-style-type: none;
+}
+.nav-links ul li {
+    display: inline;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 25px;
+    margin: 25px;
+    padding-top: 25px;
+    position: relative;
+}
+
+nav ul li a {
+    color: #444;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+
+}
+
+nav ul li a:hover {
+    color: #000;
+}
+
+nav ul li a::before {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 5px;
+    background-color: #444;
+    position: absolute;
+    top: 7px;
+    transition: ease-in-out 200ms;
+}
+nav ul li a:hover::before {
+    width: 100%;
+}
+
+.login {
+    float: right;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-right: 30px;
+    text-align: center;
+}
+/* /HEADER */
+
+
+/* BODY */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #444;
+    background: #fff;
+    height: 100%;
+    margin: 0px;
+    min-height: fit-content;
+    
+  }
+  body::after {
+    content: "";
+    background: url(/static/images/background.jpg);
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+.bckground {
+    float: unset;
+    opacity: 10%;
+    height: auto;
+    width: auto;
+}
+
+  div.all-site-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    min-height: 600px;
+    
+    margin: 30px 50px;
+    
+}
+
+
+div.content-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    margin-top: 30px;
+
+}
+
+article.CV {
+    width: 500px;
+}
+/* /BODY */
+
+
+/* FOOTER */
+
+.footer {
+    background: #303036 ;
+    color: #d3d3d3;
+    height: 220px;
+
+    width: 100%;
+    font-size: smaller;
+    
+}
+
+.footer .footer-content {
+    display: flex;
+
+}
+.footer .footer-content .footer-section {
+    flex: 1;
+    padding: 25px;
+
+}
+
+.footer-bottom {
+    background: #343a40;
+    color: #686868;
+    height: 30px;
+    text-align: center;
+    
+    
+    left: 0px;
+    padding-top: 5px;
+    width: 100%;
+}
+.footer-section ul {
+    float: left;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.footer-section ul a {
+    color: white;
+    font-size: smaller;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.footer-section ul a:hover{
+    font-weight:bold;
+    text-decoration:underline;
+}

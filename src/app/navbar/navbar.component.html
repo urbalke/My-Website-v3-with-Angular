@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/">
+        <img src="/assets/images/logo4.png" alt="logo" width="45" height=auto class="logo">
+      </a>
+
+  
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" routerLink="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+        <li ngbDropdown class="d-inline-block">
+            
+           
+                <a class="nav-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Available Projects</a>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem routerLink="/blog">Blog Project</button>
+                  <button ngbDropdownItem routerLink="/login">Login Project</button>
+                  <button ngbDropdownItem routerLink="/api">Api Project</button>
+                  <button ngbDropdownItem routerLink="/cloud">Cloud Project</button>
+
+                </div>
+        </li>
+      </ul>
+    
+    </div>
+  </nav>
