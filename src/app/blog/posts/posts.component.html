@@ -22,7 +22,7 @@
     <p style="white-space:pre-wrap">{{ p.content }}</p>
     <br>
     <button class="btn-red" (click)="deletePost(p.id)">Delete</button>
-    <button class="btn-green"(click)="getPost(p.id)" routerLink="/blog/posts/edit" >Edit</button>
+    <button class="btn-green"(click)="getPost(p.id)">Edit</button>
     <br>
     <hr>
     <br>
@@ -30,3 +30,4 @@
 
 </div>
 
+<app-edit></app-edit>
