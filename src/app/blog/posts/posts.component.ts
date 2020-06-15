@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { BlogService } from 'src/app/services/blog.service';
 import { Observable } from 'rxjs';
 import { BlogPosts } from 'src/app/blog-posts';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnChanges {
   public posts;
 
 
@@ -22,16 +22,13 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.allPosts$ = this.BlogService.getPosts();
-
-    if (!localStorage.getItem('reload')) { 
-    localStorage.setItem('reload', 'no reload') 
-    this.allPosts$ = this.BlogService.getPosts();
-    location.reload()
-    } else {
-      localStorage.removeItem('reload')
-    }
   
   }
+
+  ngOnChanges(): void {
+    this.allPosts$ = this.BlogService.getPosts();
+  }
+
 
 getPost(id: string){
   console.log("sending id:" +id);
@@ -52,3 +49,16 @@ deletePost(id: number){
 
 
 }
+
+
+
+
+
+
+//   if (!localStorage.getItem('reload')) { 
+  // localStorage.setItem('reload', 'no reload') 
+  // this.allPosts$ = this.BlogService.getPosts();
+  // location.reload()
+  // } else {
+  //   localStorage.removeItem('reload')
+  // }
