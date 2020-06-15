@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostsComponent } from '../posts/posts.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from 'src/app/services/blog.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class NewPostComponent implements OnInit {
  
   
 
-  constructor(private http: BlogService) { }
+  constructor(private http: BlogService, private router: Router) { }
 
   ngOnInit(): void {
    
@@ -30,7 +31,9 @@ export class NewPostComponent implements OnInit {
 
   postPost(){
     
-    this.http.postPost(this.newPost.value).subscribe(info =>{console.log(info)})
+    this.http.postPost(this.newPost.value).subscribe(info =>{console.log(info)});
+    this.router.navigateByUrl("/blog/posts");
+    
     
     
   }

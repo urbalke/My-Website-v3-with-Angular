@@ -58,6 +58,25 @@ class BlogBack(Resource):
         db.session.commit()
         return post_id
     
+    def patch(self):
+        args = parser.parse_args()
+        
+        post_id = args ['id']
+        post_title = args['title']
+        post_author = args['author']
+        post_content = args['content']
+        
+        post = Blog.query.get(post_id)
+        
+        post.title = str(post_title)
+        post.author = str(post_author)
+        post.content = str(post_content)
+        
+        db.session.commit()
+        
+        return "updated"
+        
+    
 class BlogSpecPost(Resource):
     @marshal_with(blog_model)
     

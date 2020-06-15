@@ -19,6 +19,7 @@ public postToEdit = new BehaviorSubject<BlogPosts>(null);
 data = { name: 'Otcollect', type: 'Website' } 
 public dataSource = new BehaviorSubject(this.data); 
 
+public postEdit_Observable = new Subject();
 
 changeData(newData: any){
   this.dataSource.next(newData); 
@@ -34,7 +35,8 @@ changeData(newData: any){
   getPost(id: string) {
     return this.http.get(this.apiUrl + '?id=' + id).subscribe((resp) => {
       this.postToEdit.next(resp);
-      console.log(this.postToEdit)
+      this.postEdit_Observable.next(resp);
+     
     });
     
   }
@@ -49,4 +51,10 @@ changeData(newData: any){
     const body = { id: id };
     return this.http.request('delete', this.apiUrl, { body: body });
   }
+
+updatePost(editedPost) {
+  return this.http.patch<BlogPosts>(this.apiUrl, editedPost);
+}
+  
+
 }

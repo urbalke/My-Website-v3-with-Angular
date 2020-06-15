@@ -1,3 +1,12 @@
 {
-    "python.pythonPath": "/home/patryk/anaconda3/envs/Angular-Flask/bin/python"
+    "python.pythonPath": "/home/patryk/anaconda3/envs/Angular-Flask/bin/python",
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder:MyWebsite}/backend/blog_project/blog.py",
+            "driver": "SQLite",
+            "group": "My Website",
+            "name": "Blog",
+            "previewLimit": 50
+        }
+    ]
 }

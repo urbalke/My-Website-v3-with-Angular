@@ -40,7 +40,7 @@ import { BlogService } from './services/blog.service';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
 
 
   ],

@@ -1,29 +1,51 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { PostsComponent } from '../posts/posts.component';
-import { BlogPosts } from 'src/app/blog-posts';
-import { BlogService } from 'src/app/services/blog.service';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs'; 
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { PostsComponent } from '../posts/posts.component';
+
+import { BlogService } from 'src/app/services/blog.service';
+
+
+import { BlogPosts } from 'src/app/blog-posts';
+import { Form, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
-  providers: [PostsComponent]
+  providers: [PostsComponent],
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
+  post: BlogPosts;
 
- post: any;
 
-  constructor(private BlogService: BlogService) { }
+  constructor(private BlogService: BlogService, private router: Router) {}
 
   ngOnInit(): void {
+    this.BlogService.postToEdit.subscribe((data) => {this.post = data});
+  
+    console.log(this.post);
+
+   
+  }
+
+
+  ngOnDestroy(): void {
+    this.BlogService.postToEdit.unsubscribe();
+  }
+
+  updatePost(editForm: NgForm) {
+
+    console.log(editForm.value);
+    this.BlogService.updatePost(editForm.value).subscribe();
+    this.router.navigateByUrl("/blog/posts");
+    
+   
+  
+  }
+
+
+
  
-    this.BlogService.postToEdit.subscribe(data => this.post = data); 
-
-}
-
-
 
 }
