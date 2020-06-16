@@ -18,6 +18,10 @@ import { EditComponent } from './blog/edit/edit.component';
 import { NewPostComponent } from './blog/new-post/new-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogService } from './services/blog.service';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { LoginRequiredComponent } from './login/login-required/login-required.component';
+import { RegisterComponent } from './login/register/register.component';
+import { LoginTestComponent } from './login/login-test/login-test.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { BlogService } from './services/blog.service';
     CloudComponent,
     PostsComponent,
     EditComponent,
-    NewPostComponent
+    NewPostComponent,
+    ForgotPasswordComponent,
+    LoginRequiredComponent,
+    RegisterComponent,
+    LoginTestComponent
   ],
   imports: [
     BrowserModule,

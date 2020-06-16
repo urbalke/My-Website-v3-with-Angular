@@ -77,16 +77,11 @@ class BlogBack(Resource):
         return "updated"
         
     
-class BlogSpecPost(Resource):
-    @marshal_with(blog_model)
-    
-    def get(self, id):
-        return "ok"
-    
+
     
     
 blogApi.add_resource(BlogBack, "/blog/api")
-blogApi.add_resource(BlogSpecPost, "/blog/api/<int:id>")
+
 
 
 

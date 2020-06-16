@@ -6,6 +6,11 @@ import { BlogComponent } from './blog/blog.component';
 import { PostsComponent } from './blog/posts/posts.component';
 import { EditComponent } from './blog/edit/edit.component';
 import { NewPostComponent } from './blog/new-post/new-post.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './login/register/register.component';
+import { LoginTestComponent } from './login/login-test/login-test.component';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { LoginRequiredComponent } from './login/login-required/login-required.component';
 
 
 const routes: Routes = [
@@ -16,6 +21,13 @@ const routes: Routes = [
   {path: 'blog/posts', component: PostsComponent },
   {path: 'blog/posts/new', component: NewPostComponent },
   {path: 'blog/posts/edit', component: EditComponent },
+  {path: 'login', component: LoginComponent},
+  {path: 'login/register', component: RegisterComponent},
+  {path: 'login/test', component: LoginTestComponent},
+  {path: 'login/forgot', component: ForgotPasswordComponent},
+  {path: 'login/required', component: LoginRequiredComponent},
+  
+
 
 ];
 

@@ -1,8 +1,9 @@
 from flask import (Blueprint, redirect, render_template, request, url_for, flash)
-from flask_login import (LoginManager, UserMixin, login_required, login_user, logout_user)
+from flask_login import (LoginManager, UserMixin, login_required, login_user, logout_user, current_user)
 from flask_sqlalchemy import SQLAlchemy
 from passlib.hash import pbkdf2_sha256
 from models import User, db
+from flask_restful import Api, Resource, reqparse, fields, marshal_with, marshal
 
 
 login = Blueprint('login',__name__,
@@ -12,6 +13,9 @@ login = Blueprint('login',__name__,
 login_manager = LoginManager()
 login_manager.login_view = '/loginrequired'
 
+
+
+
 @login.record_once
 def on_load(state):
     login_manager.init_app(state.app)
@@ -19,6 +23,49 @@ def on_load(state):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+
+##################### API ########################
+
+loginApi = Api(login)
+
+parser = reqparse.RequestParser()
+parser.add_argument('id')
+parser.add_argument('username')
+parser.add_argument('password')
+parser.add_argument('remember')
+
+
+login_model = {
+    "id": fields.Integer,
+    "username": fields.String,
+    "password": fields.String,
+}
+
+class LoginBack(Resource):
+    
+    def post(self):
+        args = parser.parse_args()
+        username = args['username']
+        password = args['password']
+        remember = args['remember']
+        
+        user_from_db= User.query.filter_by(username=username).first()
+        hash_pswd = pbkdf2_sha256.verify(password, user_from_db.password)
+        
+        if hash_pswd == True:
+            login_user(user_from_db, remember=remember)
+            logged_user_id = User.get_id(user_from_db)
+            return logged_user_id
+        else:
+            return "wrong password"
+    
+
+loginApi.add_resource(LoginBack, "/login/api")
+
+
+##################### API ########################
 
 @login.route('/login', methods=['GET', 'POST'])
 def Login():

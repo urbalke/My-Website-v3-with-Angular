@@ -16,14 +16,8 @@ public postToEdit = new BehaviorSubject<BlogPosts>(null);
   
 
 
-data = { name: 'Otcollect', type: 'Website' } 
-public dataSource = new BehaviorSubject(this.data); 
-
 public postEdit_Observable = new Subject();
 
-changeData(newData: any){
-  this.dataSource.next(newData); 
-  }
 
   getPosts() {
     return this.http.get<BlogPosts[]>(`${this.apiUrl}`);
