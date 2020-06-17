@@ -1,39 +1,43 @@
 <h2>Login page for project.</h2>
 <p>Goal was to learn how to implement Flask-Login library.
-   I have created database where user name and password is stored. 
-   Usernames are not encripted, but passwords are.
-  To secure passwords, passwords given through registration form are pushed through passlib library hash256 function with salting. 
+  I have created database where user name and password is stored.
+  Usernames are not encripted, but passwords are.
+  To secure passwords, passwords given through registration form are pushed through passlib library hash256 function
+  with salting.
   Salting prevents storing two the same passwords for different users with the same value.<br>
-<br>
-After logging in, in top right corner should appear greetings message with logout button. <br>
-All features with ability to change password through "Forgot password?" page are present.<br>
-<br>
-Cookies for every user are stored for 10 minutes. <br>
-<br>
-<strong>To check if login is working you can try to enter <a routerLink="logintest">Here</a></strong></p>
+  <br>
+  After logging in, in top right corner should appear greetings message with logout button. <br>
+  All features with ability to change password through "Forgot password?" page are present.<br>
+  <br>
+  Cookies for every user are stored for 10 minutes. <br>
+  <br>
+  <strong>To check if login is working you can try to enter <a routerLink="logintest">Here</a></strong></p>
 
 
 <div class="loginform">
-  <form [formGroup]="loginForm" (ngSubmit)="login()"> 
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-      <div class="container">
-        <label key="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" formControlName="username" required>
-    
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" formControlName="password"  required>
-        <button class="greenloginbtn" type="submit" value="login" >Login</button>
-        <label>
-          <input type="checkbox" checked="True" name="remember" formControlName="remember"> Remember me 
-        </label>
-        
+    <div class="container">
+      <label key="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" formControlName="username" required>
+
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" formControlName="password" required>
+      <button class="greenloginbtn" type="submit" value="login">Login</button>
+      <label>
+        <input type="checkbox" checked="True" name="remember" formControlName="remember"> Remember me
+      </label>
+
+    </div>
+
+    <a routerLink="/">
+      <div class="container" style="background-color:#f1f1f1">
+
+        <span class="password"> <a routerLink="/login/forgot">Forgot password?</a></span>
+
+        <div class="register">
+          <a routerLink="/login/register"> Register </a></div>
       </div>
-    
-      <a routerLink="/" ><div class="container" style="background-color:#f1f1f1">
-      
-        <span class="password">Forgot <a routerLink="/forgotpassword">password?</a></span>
-     
-      <div class="register">
-        <a routerLink="/register"> Register </a></div> </div></a>
-  </form> 
+    </a>
+  </form>
 </div>

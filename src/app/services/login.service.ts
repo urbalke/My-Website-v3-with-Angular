@@ -15,4 +15,12 @@ login(loginForm){
 return this.http.post(this.apiUrl, loginForm);
 }
 
+register(loginForm){
+  return this.http.put(this.apiUrl, loginForm)
+}
+
+changePassword(loginForm){
+  return this.http.patch(this.apiUrl, loginForm);
+} 
+
 }

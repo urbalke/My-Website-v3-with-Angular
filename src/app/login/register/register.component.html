@@ -1,1 +1,19 @@
-<p>register works!</p>
+<form [formGroup]="registerForm">
+    <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" id="username" name="username" formControlName="username"
+            required />
+
+        <label for="username"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" formControlName="password" required />
+
+        <button class="greenloginbtn" type="submit" value="register" (click)="register()">
+            Register
+        </button>
+    </div>
+    <div class="container" style="background-color: #f1f1f1;">
+        <a routerLink="/login">
+            <button type="button" class="cancelbtn">Cancel</button>
+        </a>
+    </div>
+</form>
