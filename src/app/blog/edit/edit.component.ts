@@ -39,9 +39,7 @@ export class EditComponent implements OnInit, OnDestroy {
     console.log(editForm.value);
     this.BlogService.updatePost(editForm.value).subscribe();
     this.router.navigateByUrl("/blog/posts");
-    
-   
-  
+
   }
 
 

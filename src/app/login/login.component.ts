@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +16,27 @@ export class LoginComponent implements OnInit {
     remember: new FormControl(),
   });
 
-  constructor(private LoginService: LoginService) {}
+  isLoginError: boolean= false;
+
+  constructor(private LoginService: LoginService, private Router: Router) {}
 
   ngOnInit(): void {}
 
   login() {
     console.log(this.loginForm.value);
     this.LoginService.login(this.loginForm.value).subscribe();
+  }
+
+  login2(){
+    this.LoginService.userAuthentication(this.loginForm.value).subscribe((data: any)=> {
+      localStorage.setItem('userToken', data.token);
+      this.Router.navigate(['/']);
+
+    },
+     (err: HttpErrorResponse)=> {
+       this.isLoginError = true;
+     },
+
+    )
   }
 }

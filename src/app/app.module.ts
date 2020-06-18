@@ -22,6 +22,8 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
 import { LoginRequiredComponent } from './login/login-required/login-required.component';
 import { RegisterComponent } from './login/register/register.component';
 import { LoginTestComponent } from './login/login-test/login-test.component';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,7 @@ import { LoginTestComponent } from './login/login-test/login-test.component';
 
 
   ],
-  providers: [BlogService],
+  providers: [BlogService, AuthGuard, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

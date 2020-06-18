@@ -11,6 +11,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { LoginTestComponent } from './login/login-test/login-test.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { LoginRequiredComponent } from './login/login-required/login-required.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'blog/posts/edit', component: EditComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/register', component: RegisterComponent },
-  { path: 'login/test', component: LoginTestComponent },
+  { path: 'login/test', component: LoginTestComponent , canActivate:[AuthGuard]},
   { path: 'login/forgot', component: ForgotPasswordComponent },
   { path: 'login/required', component: LoginRequiredComponent },
 ];

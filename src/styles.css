@@ -177,6 +177,7 @@ body {
     user-select: none;
     vertical-align: middle;
     -moz-appearance: button;
+    
 }
 
 .logoutbtn:hover {

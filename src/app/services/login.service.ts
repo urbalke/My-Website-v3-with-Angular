@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginService {
 
 apiUrl: string = 'http://127.0.0.1:5000/login/api';
+tokenUrl: string = 'http://127.0.0.1:5000/token'
 
   constructor(private http: HttpClient) { }
 
@@ -22,5 +23,12 @@ register(loginForm){
 changePassword(loginForm){
   return this.http.patch(this.apiUrl, loginForm);
 } 
+
+
+userAuthentication(loginForm){
+  return this.http.post(this.tokenUrl, loginForm);
+
+}
+
 
 }
