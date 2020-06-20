@@ -1,1 +1,40 @@
-<p>api works!</p>
+<h1>Api Projects</h1>
+<p>This page has several Api projects on board. My goal was to prove I can both create API on my own, and use existing
+    ones.
+    Thats why I recycled my old webscraping project and implemented it on my website. <br>
+    <br>
+    It works like this:</p>
+<ul>
+    <li>You can use form below to send <a href="https://allegro.pl/" target="_blank">Allegro</a> url you want to scrap,
+        or send POST
+        request on /api/allegro:<br></li><br>
+    <code> &#123; <br> 
+            "base_url" : "Enter url to article you are interested in"<br>
+            "pages" : "Enter number of pages to scrap" <br>
+             &#125;<br></code>
+
+
+
+    <li>Example POST: <br><br>
+        <code>&#123;
+                <br>
+                    "base_url" : "https://allegro.pl/listing?string=rower&bmatch=baseline-product-eyesa2-dict43-spo-1-4-0318"<br>
+                    "pages" : "2" <br>
+                    &#125;
+            </code>
+
+    </li>
+</ul>
+
+<div class="form-wrap1">
+    <h2>Allegro WebScraping</h2>
+    <form class="form-wrap1" [formGroup]="requestForm"> 
+        <label for="base_url">Enter base url</label>
+        <input type="text" name='base_url' id='base_url' placeholder="Enter base url" aria-label="Enter base url" formControlName="base_url">
+        <br>
+        <label for="pages">How many pages?</label>
+        <input type="number" name='pages' id='pages' placeholder="Pages?" aria-label="Pages?" formControlName="pages">
+        <br>
+        <input type='submit' class="btn" value='Go!' (click)="webScrap()">
+    </form>
+</div>

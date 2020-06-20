@@ -19,11 +19,11 @@ import { NewPostComponent } from './blog/new-post/new-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogService } from './services/blog.service';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
-import { LoginRequiredComponent } from './login/login-required/login-required.component';
 import { RegisterComponent } from './login/register/register.component';
 import { LoginTestComponent } from './login/login-test/login-test.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginService } from './services/login.service';
+import { ApiResultsComponent } from './api/api-results/api-results.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +40,9 @@ import { LoginService } from './services/login.service';
     EditComponent,
     NewPostComponent,
     ForgotPasswordComponent,
-    LoginRequiredComponent,
     RegisterComponent,
-    LoginTestComponent
+    LoginTestComponent,
+    ApiResultsComponent
   ],
   imports: [
     BrowserModule,

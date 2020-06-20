@@ -1,5 +1,5 @@
 from flask import (Blueprint, redirect, render_template,
-                   request, url_for, flash)
+                   request, url_for, flash, jsonify, make_response)
 from flask_login import (LoginManager, UserMixin,
                          login_required, login_user, logout_user, current_user)
 from flask_sqlalchemy import SQLAlchemy
@@ -48,6 +48,7 @@ login_model = {
 token_model = {
     "token": fields.String
 }
+
 
 class LoginBack(Resource):
 
@@ -109,51 +110,53 @@ loginApi.add_resource(LoginBack, "/login/api")
 
 
 class GenToken(Resource):
-    @marshal_with(token_model)
     def post(self):
+        # Parse login args, then check if user exist. Return encoded Token if Y, return Err message if not.
         args = parser.parse_args()
         username = args['username']
         password = args['password']
-        
-        encoded = jwt.encode({"username": username, "password": password}, key, algorithm='HS256' ).decode('utf-8')
-        return {'token': encoded}
+
+        try:
+
+            # Get user from database
+            user_from_db = User.query.filter_by(username=username).first()
+
+            # Verify entered password
+            hash_pswd = pbkdf2_sha256.verify(password, user_from_db.password)
+
+            # Return Token if password is Right
+            if hash_pswd == True:
+                encoded = jwt.encode(
+                    {"username": username, "password": password}, key, algorithm='HS256').decode('utf-8')
+                return {'token': encoded}, 200 
+            else:
+                
+                return make_response(jsonify(err= "Wrong Password"), 401)
+
+            # If Wrong username:
+        except AttributeError:
+            return make_response(jsonify(err= "Wrong Password"), 401)
 
 
 loginApi.add_resource(GenToken, "/token")
-
 
 
 class ValidateToken(Resource):
     def post(self):
         args = parser.parse_args()
         token = args['token']
-        
-        data= jwt.decode(token, key, algorithms='HS256')
+
+        data = jwt.decode(token, key, algorithms='HS256')
         return data
 
 
 loginApi.add_resource(ValidateToken, "/token/validate")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ##################### AUTHENTICATION ########################
+
+
+
 
 @login.route('/login', methods=['GET', 'POST'])
 def Login():

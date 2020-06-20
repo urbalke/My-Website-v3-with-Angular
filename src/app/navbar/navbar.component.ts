@@ -1,22 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnChanges {
   active = 'top';
-  constructor(private Router: Router) { }
+  isLoggedIn: Observable<boolean>;
+
+  constructor(private Router: Router, private LoginService: LoginService) { }
 
   ngOnInit(): void {
+this.isLoggedIn = this.LoginService.isLoggedIn
+  
   }
 
-  logOut(){
-localStorage.removeItem('userToken');
-this.Router.navigate(['/'])
+  ngOnChanges(): void {
+  }
+
+
+  logOut() {
+    localStorage.removeItem('userToken');
+    this.Router.navigate(['/']);
+    this.LoginService.isLoggedIn.next(false)
   }
 
 }

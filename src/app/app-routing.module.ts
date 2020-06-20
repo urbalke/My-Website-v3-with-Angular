@@ -10,8 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { LoginTestComponent } from './login/login-test/login-test.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
-import { LoginRequiredComponent } from './login/login-required/login-required.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ApiComponent } from './api/api.component';
+import { ApiResultsComponent } from './api/api-results/api-results.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'login/register', component: RegisterComponent },
   { path: 'login/test', component: LoginTestComponent , canActivate:[AuthGuard]},
   { path: 'login/forgot', component: ForgotPasswordComponent },
-  { path: 'login/required', component: LoginRequiredComponent },
+  { path: 'api', component: ApiComponent},
+  {path: 'api/results', component: ApiResultsComponent}
 ];
 
 @NgModule({
