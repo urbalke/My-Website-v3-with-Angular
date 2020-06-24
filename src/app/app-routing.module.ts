@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
 import { AuthGuard } from './auth/auth.guard';
 import { ApiComponent } from './api/api.component';
 import { ApiResultsComponent } from './api/api-results/api-results.component';
+import { CloudComponent } from './cloud/cloud.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'login/test', component: LoginTestComponent , canActivate:[AuthGuard]},
   { path: 'login/forgot', component: ForgotPasswordComponent },
   { path: 'api', component: ApiComponent},
-  {path: 'api/results', component: ApiResultsComponent}
+  { path: 'api/results', component: ApiResultsComponent},
+  { path: 'cloud', component: CloudComponent},
 ];
 
 @NgModule({

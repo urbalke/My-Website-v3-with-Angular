@@ -3,7 +3,7 @@
 <div class="form-wrap">
     
     <h2>Create new post</h2>
-    <form action='/posts' method='POST' [formGroup]="newPost">
+    <form class="form-wrap1" action='/posts' method='POST' [formGroup]="newPost">
         <label for="title">Title:</label>
         <input type="text" formControlName="title" name='title' id='title' placeholder="Give post a title" aria-label="Give post a title">
         <br>
