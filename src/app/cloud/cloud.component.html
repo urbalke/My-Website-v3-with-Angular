@@ -1,24 +1,20 @@
 <h1>Cloud Service:</h1>
-<p>For now you don't have to log in, just testing capabilities of handmade cloud. </p>
-<hr>
-<!-- for cloud_files in cloud_contents -->
-    
+<p>
+  For now you don't have to log in, just testing capabilities of handmade cloud.
+</p>
+<hr />
+
+<div class="navigateDown">
+    <tr (dblclick)="navigateDown()">
+        <td>...</td> 
+      </tr>
+</div>
 
 
-<a href=""> 
-
-<!-- cloud_files    -->
-</a>
-    <a href="">Download</a> 
-    <a href="">Delete</a>
-
-    <br><hr>
- <!-- endfor  -->
-<br>
-<br>
-
-
-
-<form>
-    <input type=file name=file>
-    <input type="submit">
+<div class="cloud-wrap" *ngFor="let file of base | async" >
+  <tr (dblclick)="navigateUp(file.fileName, file.filePath, file.isDir)">
+    <td>{{ file.fileName }}</td> 
+    <td>  Download  </td>
+    <td> Delete </td>
+  </tr>
+</div>

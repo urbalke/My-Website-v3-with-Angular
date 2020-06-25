@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CloudService } from '../services/cloud.service';
+import { Files } from '../files';
 
 @Component({
   selector: 'app-cloud',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CloudComponent implements OnInit {
 
-  constructor() { }
+  constructor(private CloudService: CloudService) { }
+
+base: Observable<Array<Files>>;
 
   ngOnInit(): void {
+    this.base = this.CloudService.obtainBase();
   }
 
+  navigateUp(name, path, isDir){
+    this.CloudService.navUp(name, path, isDir).subscribe();
+  }
+
+ navigateDown(){
+    window.location.reload();
+  }
 }

@@ -64,7 +64,7 @@ parser.add_argument('filePath')
 
 response_model = {
     "fileName": fields.String,
-    "fileType": fields.Boolean,
+    "isDir": fields.String,
     "filePath": fields.String,
     
 }
@@ -76,7 +76,7 @@ class CloudObtain(Resource):
         args = parser.parse_args()
 
         fileName = args['fileName']
-        fileType = args['isDir']
+        isDir = args['isDir']
         filePath = args['filePath']
         command = args['command']
 
@@ -87,10 +87,36 @@ class CloudObtain(Resource):
                     if not entry.name.startswith('.'):
                         contents.append({
                             "fileName": entry.name,
-                            "fileType": entry.is_dir(),
+                            "isDir": entry.is_dir(),
                             "filePath": entry.path,
                         })
             return  contents
+        elif command == 'navUp' and (isDir == 'true' or 'True'): 
+            contents = []
+            with os.scandir(filePath) as it:
+                for entry in it:
+                    contents.append({
+                            "fileName": entry.name,
+                            "fileType": entry.is_dir(),
+                            "filePath": entry.path,
+                        })
+            
+            return contents #{"fileName": "test"}
+        elif command == 'navDown' and isDir == 'true':
+            contents = []
+            with os.scandir(filePath) as it:
+                for entry in it:
+                    contents.append({
+                            "fileName": entry.name,
+                            "fileType": entry.is_dir(),
+                            "filePath": entry.path,
+                        })
+            
+            return contents
+        elif command == 'download':
+            return "file"
+        else:
+            return "DUNNO WHAT TO DO"
 
 
 cloudApi.add_resource(CloudObtain, '/cloud/obtain')
