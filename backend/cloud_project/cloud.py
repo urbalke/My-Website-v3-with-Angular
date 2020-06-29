@@ -5,6 +5,7 @@ import os
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from flask_restful import Api, Resource, reqparse, fields, marshal_with, marshal
+from pathlib import Path
 
 
 piccolo = Blueprint('piccolo', __name__,
@@ -102,9 +103,10 @@ class CloudObtain(Resource):
                         })
             
             return contents #{"fileName": "test"}
-        elif command == 'navDown' and isDir == 'true':
+        elif command == 'navDown':
             contents = []
-            with os.scandir(filePath) as it:
+            path = Path(str(filePath))
+            with os.scandir(path.parent.parent) as it:
                 for entry in it:
                     contents.append({
                             "fileName": entry.name,

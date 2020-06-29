@@ -1,28 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { CloudService } from '../services/cloud.service';
 import { Files } from '../files';
 
 @Component({
   selector: 'app-cloud',
   templateUrl: './cloud.component.html',
-  styleUrls: ['./cloud.component.css']
+  styleUrls: ['./cloud.component.css'],
 })
 export class CloudComponent implements OnInit {
+  constructor(private CloudService: CloudService) {}
 
-  constructor(private CloudService: CloudService) { }
-
-base: Observable<Array<Files>>;
+  currentFiles = new BehaviorSubject<Array<Files>>(null);
+  base: Observable<Array<Files>>;
 
   ngOnInit(): void {
-    this.base = this.CloudService.obtainBase();
+    this.CloudService.obtainBase().subscribe((data) => {
+      this.currentFiles.next(data);
+    });
   }
 
-  navigateUp(name, path, isDir){
-    this.CloudService.navUp(name, path, isDir).subscribe();
+  navigateUp(name, path, isDir) {
+    this.CloudService.navUp(name, path, isDir).subscribe((data) => {
+      this.currentFiles.next(data);
+    });
   }
 
- navigateDown(){
-    window.location.reload();
+  navigateDown() {
+    this.CloudService.navDown(this.currentFiles.value[0]).subscribe((data) => {
+      this.currentFiles.next(data);
+    });
   }
 }

@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="cloud-wrap" *ngFor="let file of base | async" >
+<div class="cloud-wrap" *ngFor="let file of currentFiles | async" >
   <tr (dblclick)="navigateUp(file.fileName, file.filePath, file.isDir)">
     <td>{{ file.fileName }}</td> 
     <td>  Download  </td>
