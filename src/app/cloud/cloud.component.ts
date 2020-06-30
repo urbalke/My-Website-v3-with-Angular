@@ -12,7 +12,7 @@ export class CloudComponent implements OnInit {
   constructor(private CloudService: CloudService) {}
 
   currentFiles = new BehaviorSubject<Array<Files>>(null);
-  base: Observable<Array<Files>>;
+  lastPath = new BehaviorSubject<Files>(null);
 
   ngOnInit(): void {
     this.CloudService.obtainBase().subscribe((data) => {
@@ -20,15 +20,18 @@ export class CloudComponent implements OnInit {
     });
   }
 
-  navigateUp(name, path, isDir) {
-    this.CloudService.navUp(name, path, isDir).subscribe((data) => {
+  navigateUp(fileName, filePath, isDir, fileParent) {
+    this.lastPath.next({fileName, filePath, isDir, fileParent})
+    this.CloudService.navUp(fileName, filePath, isDir, fileParent).subscribe((data) => {
       this.currentFiles.next(data);
     });
   }
 
   navigateDown() {
-    this.CloudService.navDown(this.currentFiles.value[0]).subscribe((data) => {
+    this.CloudService.navDown(this.lastPath.value).subscribe((data) => {
       this.currentFiles.next(data);
+      this.lastPath.next(data[0])
     });
   }
 }
+// this.currentFiles.value[0]

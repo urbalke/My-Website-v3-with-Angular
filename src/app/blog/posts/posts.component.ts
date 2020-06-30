@@ -50,15 +50,3 @@ deletePost(id: number){
 
 }
 
-
-
-
-
-
-//   if (!localStorage.getItem('reload')) { 
-  // localStorage.setItem('reload', 'no reload') 
-  // this.allPosts$ = this.BlogService.getPosts();
-  // location.reload()
-  // } else {
-  //   localStorage.removeItem('reload')
-  // }

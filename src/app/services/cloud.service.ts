@@ -20,12 +20,13 @@ cloudApi = "http://127.0.0.1:5000/cloud/obtain"
   }
 
 
-  navUp(name, path, isDir){
+  navUp(fileName, filePath, isDir, fileParent){
     return this.http.post<Array<Files>>(this.cloudApi, {
         "command": "navUp",
-        "fileName": name,
-        "filePath": path,
+        "fileName": fileName,
+        "filePath": filePath,
         "isDir": isDir,
+        "fileParent": fileParent,
 
     })
   }
@@ -37,6 +38,7 @@ cloudApi = "http://127.0.0.1:5000/cloud/obtain"
         "fileName": refFile.fileName,
         "filePath": refFile.filePath,
         "isDir": refFile.isDir,
+        "fileParent": refFile.fileParent,
 
     })
   }

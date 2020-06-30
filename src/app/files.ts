@@ -3,5 +3,6 @@ export class Files {
     filePath?: string;
     command?: string;
     isDir?: string;
+    fileParent?: string;
 }
 

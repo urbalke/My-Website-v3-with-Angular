@@ -61,12 +61,14 @@ parser.add_argument('fileName')
 parser.add_argument('isDir')
 parser.add_argument('command')
 parser.add_argument('filePath')
+parser.add_argument('fileParent')
 
 
 response_model = {
     "fileName": fields.String,
-    "isDir": fields.String,
+    "isDir": fields.Boolean,
     "filePath": fields.String,
+    "fileParent": fields.String,
     
 }
 
@@ -80,38 +82,45 @@ class CloudObtain(Resource):
         isDir = args['isDir']
         filePath = args['filePath']
         command = args['command']
+        fileParent = args['fileParent']
 
         if filePath == 'root' and command == None:
             contents = []
             with os.scandir('/home/patryk/anaconda3/envs/Angular-Flask/MyWebsite/userfiles') as it:
                 for entry in it:
                     if not entry.name.startswith('.'):
+                        path = Path(str(entry.path))
                         contents.append({
                             "fileName": entry.name,
-                            "isDir": entry.is_dir(),
+                            "isDir": str(entry.is_dir()),
                             "filePath": entry.path,
+                            "fileParent": path.parent,
                         })
             return  contents
         elif command == 'navUp' and (isDir == 'true' or 'True'): 
             contents = []
             with os.scandir(filePath) as it:
                 for entry in it:
+                    path = Path(str(entry.path))
                     contents.append({
                             "fileName": entry.name,
-                            "fileType": entry.is_dir(),
+                            "isDir": str(entry.is_dir()),
                             "filePath": entry.path,
+                            "fileParent": path.parent,
                         })
             
             return contents #{"fileName": "test"}
         elif command == 'navDown':
             contents = []
             path = Path(str(filePath))
-            with os.scandir(path.parent.parent) as it:
+            with os.scandir(fileParent) as it:
                 for entry in it:
                     contents.append({
                             "fileName": entry.name,
-                            "fileType": entry.is_dir(),
+                            "isDir": str(entry.is_dir()),
                             "filePath": entry.path,
+                            "fileParent": path.parent.parent,
+
                         })
             
             return contents
