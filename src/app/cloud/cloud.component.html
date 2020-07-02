@@ -18,3 +18,20 @@
     <td> Delete </td>
   </tr>
 </div>
+
+
+      <form (ngSubmit)="uploadFile(File)"method="post" >
+        <input type="file" #File name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload" name="submit">
+        </form>
+        
+
+        <div class="form-group">
+          <label for="file">Choose File</label>
+          <input type="file"
+                 id="file"
+                 #file
+                 (change)="handleFileInput($event.target.files)">
+                 <button (click)="handleFileInput(file)">Send</button>
+                 
+      </div>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Files } from '../files';
 import { Router } from '@angular/router';
 import { fileURLToPath } from 'url';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,20 @@ cloudApi = "http://127.0.0.1:5000/cloud/obtain"
     })
   }
 
+upload(formData){
+  console.log(formData);
+  return this.http.post<any>("http://127.0.0.1:5000/cloud/upload", formData, {
+    reportProgress: true,
+    observe: 'events',
+  })
+}
 
+postFile(fileToUpload: File): Observable<boolean> {
+  const endpoint = 'your-destination-url';
+  const formData: FormData = new FormData();
+  formData.append('fileKey', fileToUpload, fileToUpload.name);
+  return this.http.post<any>("http://127.0.0.1:5000/cloud/upload", formData);
+}
 
 
 

@@ -62,6 +62,7 @@ parser.add_argument('isDir')
 parser.add_argument('command')
 parser.add_argument('filePath')
 parser.add_argument('fileParent')
+parser.add_argument('file')
 
 
 response_model = {
@@ -128,6 +129,28 @@ class CloudObtain(Resource):
             return "file"
         else:
             return "DUNNO WHAT TO DO"
+        
+class CloudUpload(Resource):
+    
+    def post(self):
+        
+        args = parser.parse_args()
 
+        fileName = args['fileName']
+        isDir = args['isDir']
+        filePath = args['filePath']
+        command = args['command']
+        fileParent = args['fileParent']
+        
+        
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        
+        filedest = '/home/patryk/anaconda3/envs/Angular-Flask/MyWebsite/userfiles/'
+        
+        file.save(os.path.join(filedest, filename))
+        return "ok"
+        
 
+cloudApi.add_resource(CloudUpload, '/cloud/upload')
 cloudApi.add_resource(CloudObtain, '/cloud/obtain')
