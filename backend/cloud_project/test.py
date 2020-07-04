@@ -7,7 +7,7 @@ contents =[]
 with os.scandir('/home/patryk/anaconda3/envs/Angular-Flask/MyWebsite/userfiles/testFolder2') as it:
     for entry in it:
         if not entry.name.startswith('.'):
-            contents.append(entry.name)
+            contents.append(entry.is_dir())
             
-print(sss)
+print(contents)
             

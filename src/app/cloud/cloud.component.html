@@ -12,26 +12,28 @@
 
 
 <div class="cloud-wrap" *ngFor="let file of currentFiles | async" >
-  <tr (dblclick)="navigateUp(file.fileName, file.filePath, file.isDir, file.fileParent)">
-    <td>{{ file.fileName }}</td> 
+  <tr >
+    <td (dblclick)="navigateUp(file.fileName, file.filePath, file.isDir, file.fileParent)">{{ file.fileName }}</td> 
     <td>  Download  </td>
-    <td> Delete </td>
+    <td (dblclick)="deleteFile(file.fileName, file.filePath, file.isDir, file.fileParent)"> Delete </td>
   </tr>
 </div>
 
 
-      <form (ngSubmit)="uploadFile(File)"method="post" >
-        <input type="file" #File name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload" name="submit">
-        </form>
         
 
-        <div class="form-group">
-          <label for="file">Choose File</label>
-          <input type="file"
-                 id="file"
-                 #file
-                 (change)="handleFileInput($event.target.files)">
-                 <button (click)="handleFileInput(file)">Send</button>
-                 
-      </div>
+
+<div>
+
+  <form [formGroup]="uploadForm" (ngSubmit)="uploadSelectedFile()">
+    <div>
+      <input type="file" name="profile" (change)="onFileSelect($event)" />
+    </div>
+    <div>
+      <button type="submit">Upload</button>
+    </div>
+  </form>
+
+
+</div>
+   

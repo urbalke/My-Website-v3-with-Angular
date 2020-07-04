@@ -70,7 +70,7 @@ response_model = {
     "isDir": fields.Boolean,
     "filePath": fields.String,
     "fileParent": fields.String,
-    
+
 }
 
 
@@ -93,47 +93,102 @@ class CloudObtain(Resource):
                         path = Path(str(entry.path))
                         contents.append({
                             "fileName": entry.name,
-                            "isDir": str(entry.is_dir()),
+                            "isDir": entry.is_dir(),
                             "filePath": entry.path,
                             "fileParent": path.parent,
                         })
-            return  contents
-        elif command == 'navUp' and (isDir == 'true' or 'True'): 
+            return contents
+
+        elif command == 'obtainFiles':
+            contents = []
+            if (isDir == 'true' or 'True' or True):
+                with os.scandir(filePath) as it:
+                    for entry in it:
+                        if not entry.name.startswith('.'):
+                            path = Path(str(entry.path))
+                            contents.append({
+                                "fileName": entry.name,
+                                "isDir": entry.is_dir(),
+                                "filePath": entry.path,
+                                "fileParent": path.parent,
+                            })
+                return contents
+            else:
+                with os.scandir(fileParent) as it:
+                    for entry in it:
+                        if not entry.name.startswith('.'):
+                            path = Path(str(entry.path))
+                            contents.append({
+                                "fileName": entry.name,
+                                "isDir": entry.is_dir(),
+                                "filePath": entry.path,
+                                "fileParent": path.parent,
+                            })
+                return contents
+
+        elif command == 'navUp' and (isDir == 'true' or 'True'):
             contents = []
             with os.scandir(filePath) as it:
                 for entry in it:
                     path = Path(str(entry.path))
                     contents.append({
-                            "fileName": entry.name,
-                            "isDir": str(entry.is_dir()),
-                            "filePath": entry.path,
-                            "fileParent": path.parent,
-                        })
-            
-            return contents #{"fileName": "test"}
+                        "fileName": entry.name,
+                        "isDir": entry.is_dir(),
+                        "filePath": entry.path,
+                        "fileParent": path.parent,
+                    })
+
+            return contents  # {"fileName": "test"}
         elif command == 'navDown':
             contents = []
             path = Path(str(filePath))
             with os.scandir(fileParent) as it:
                 for entry in it:
                     contents.append({
-                            "fileName": entry.name,
-                            "isDir": str(entry.is_dir()),
-                            "filePath": entry.path,
-                            "fileParent": path.parent.parent,
+                        "fileName": entry.name,
+                        "isDir": entry.is_dir(),
+                        "filePath": entry.path,
+                        "fileParent": path.parent.parent,
 
-                        })
-            
+                    })
+
             return contents
-        elif command == 'download':
+        elif command == 'downloadFile':
             return "file"
         else:
             return "DUNNO WHAT TO DO"
-        
+
+
 class CloudUpload(Resource):
-    
+
     def post(self):
-        
+
+        args = parser.parse_args()
+
+        fileName = args['fileName']
+        isDir = args['isDir']
+        filePath = args['filePath']
+        command = args['command']
+        fileParent = args['fileParent']
+
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+
+        if (isDir == 'true' or 'True' or True):
+            filedest = str(filePath)
+
+            file.save(os.path.join(filedest, filename))
+
+            return "ok" + filedest
+        else:
+            filedest = str(fileParent + "/")
+            file.save(os.path.join(filedest, filename))
+
+            return filedest
+
+
+class CloudDelete(Resource):
+    def post(self):
         args = parser.parse_args()
 
         fileName = args['fileName']
@@ -142,15 +197,9 @@ class CloudUpload(Resource):
         command = args['command']
         fileParent = args['fileParent']
         
-        
-        file = request.files['file']
-        filename = secure_filename(file.filename)
-        
-        filedest = '/home/patryk/anaconda3/envs/Angular-Flask/MyWebsite/userfiles/'
-        
-        file.save(os.path.join(filedest, filename))
+        os.remove(filePath)
         return "ok"
-        
 
+cloudApi.add_resource(CloudDelete, '/cloud/delete')
 cloudApi.add_resource(CloudUpload, '/cloud/upload')
 cloudApi.add_resource(CloudObtain, '/cloud/obtain')
