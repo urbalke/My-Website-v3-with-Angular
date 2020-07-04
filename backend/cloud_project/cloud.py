@@ -2,6 +2,7 @@ from flask import (Blueprint, redirect, render_template,
                    request, url_for, flash, send_from_directory, jsonify)
 from config import *
 import os
+from os import rmdir
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from flask_restful import Api, Resource, reqparse, fields, marshal_with, marshal
@@ -156,7 +157,7 @@ class CloudObtain(Resource):
         elif command == 'downloadFile':
             return "file"
         else:
-            return "DUNNO WHAT TO DO"
+            return "err"
 
 
 class CloudUpload(Resource):
@@ -179,12 +180,12 @@ class CloudUpload(Resource):
 
             file.save(os.path.join(filedest, filename))
 
-            return "ok" + filedest
+            return "File uploaded"
         else:
             filedest = str(fileParent + "/")
             file.save(os.path.join(filedest, filename))
 
-            return filedest
+            return "File uploaded"
 
 
 class CloudDelete(Resource):
@@ -196,9 +197,12 @@ class CloudDelete(Resource):
         filePath = args['filePath']
         command = args['command']
         fileParent = args['fileParent']
-        
-        os.remove(filePath)
-        return "ok"
+        if (isDir == 'true' or 'True' or True):
+            rmdir(filePath)
+            return "Directory Removed"
+        else:
+            os.remove(filePath)
+            return "File removed"
 
 cloudApi.add_resource(CloudDelete, '/cloud/delete')
 cloudApi.add_resource(CloudUpload, '/cloud/upload')

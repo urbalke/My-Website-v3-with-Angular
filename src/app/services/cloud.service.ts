@@ -59,7 +59,7 @@ deleteUrl = "http://127.0.0.1:5000/cloud/delete";
   }
 
   deleteFile(fileName, filePath, isDir, fileParent){
-    return this.http.post<Array<Files>>(this.cloudApi, {
+    return this.http.post<Array<Files>>(this.deleteUrl, {
         "command": "deleteFile",
         "fileName": fileName,
         "filePath": filePath,

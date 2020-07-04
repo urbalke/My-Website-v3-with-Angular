@@ -81,11 +81,8 @@ export class CloudComponent implements OnInit {
   }
 
   deleteFile(fileName, filePath, isDir, fileParent) {
-    this.CloudService.deleteFile(fileName, filePath, isDir, fileParent).subscribe(
-      (data) => {
-        this.currentFiles.next(data);
-      }
-    );
+    this.CloudService.deleteFile(fileName, filePath, isDir, fileParent).subscribe();
+      this.refreshContents();
   }
 
 }
