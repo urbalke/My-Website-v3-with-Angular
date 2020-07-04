@@ -154,8 +154,7 @@ class CloudObtain(Resource):
                     })
 
             return contents
-        elif command == 'downloadFile':
-            return "file"
+
         else:
             return "err"
 
@@ -203,7 +202,19 @@ class CloudDelete(Resource):
         else:
             os.remove(filePath)
             return "File removed"
+        
+class CloudDownload(Resource):
+    def post(self):
+        args = parser.parse_args()
 
+        fileName = args['fileName']
+        isDir = args['isDir']
+        filePath = args['filePath']
+        command = args['command']
+        fileParent = args['fileParent']
+        return send_from_directory(fileParent, fileName, as_attachment=True)
+
+cloudApi.add_resource(CloudDownload, '/cloud/download')
 cloudApi.add_resource(CloudDelete, '/cloud/delete')
 cloudApi.add_resource(CloudUpload, '/cloud/upload')
 cloudApi.add_resource(CloudObtain, '/cloud/obtain')
