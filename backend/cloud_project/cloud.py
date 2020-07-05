@@ -196,7 +196,7 @@ class CloudDelete(Resource):
         filePath = args['filePath']
         command = args['command']
         fileParent = args['fileParent']
-        if (isDir == 'true' or 'True' or True):
+        if isDir == True:
             rmdir(filePath)
             return "Directory Removed"
         else:
@@ -212,6 +212,8 @@ class CloudDownload(Resource):
         filePath = args['filePath']
         command = args['command']
         fileParent = args['fileParent']
+        
+
         return send_from_directory(fileParent, fileName, as_attachment=True)
 
 cloudApi.add_resource(CloudDownload, '/cloud/download')

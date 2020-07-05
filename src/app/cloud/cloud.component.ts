@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { CloudService } from '../services/cloud.service';
 import { Files } from '../files';
-import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-cloud',
@@ -15,12 +13,18 @@ export class CloudComponent implements OnInit {
   constructor(
     private CloudService: CloudService,
     private formBuilder: FormBuilder,
+    
   ) {}
 
   uploadForm: FormGroup;
+  fileUrl;
+  blob;
 
   currentFiles = new BehaviorSubject<Array<Files>>(null);
   workingDir = new BehaviorSubject<Files>(null);
+
+
+  
 
   ngOnInit(): void {
     this.CloudService.obtainBase().subscribe((data) => {
@@ -85,4 +89,14 @@ export class CloudComponent implements OnInit {
       this.refreshContents();
   }
 
+  downloadFile(fileName, filePath, isDir, fileParent) {
+    this.CloudService.downloadFile(fileName, filePath, isDir, fileParent).subscribe((data:any) => { 
+      var a = document.createElement("a");
+          a.href = URL.createObjectURL(data);
+          a.download = fileName;
+          a.click();
+    
+    });
+  
+}
 }

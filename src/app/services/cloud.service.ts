@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Files } from '../files';
 import { Router } from '@angular/router';
-import { fileURLToPath } from 'url';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +11,7 @@ export class CloudService {
 cloudApi = "http://127.0.0.1:5000/cloud/obtain";
 uploadUrl = 'http://127.0.0.1:5000/cloud/upload';
 deleteUrl = "http://127.0.0.1:5000/cloud/delete";
+downloadUrl = "http://127.0.0.1:5000/cloud/download"
 
   constructor(private http: HttpClient, private Router: Router) { }
 
@@ -67,5 +66,16 @@ deleteUrl = "http://127.0.0.1:5000/cloud/delete";
         "fileParent": fileParent,
 
     })
+  }
+  
+
+  downloadFile(fileName, filePath, isDir, fileParent) {
+    return this.http.post(this.downloadUrl, {
+        "fileName": fileName,
+        "filePath": filePath,
+        "isDir": isDir,
+        "fileParent": fileParent,
+
+    }, {responseType: 'blob'})
   }
 }

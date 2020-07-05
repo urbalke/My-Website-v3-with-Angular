@@ -42,7 +42,7 @@ import { ApiResultsComponent } from './api/api-results/api-results.component';
     ForgotPasswordComponent,
     RegisterComponent,
     LoginTestComponent,
-    ApiResultsComponent
+    ApiResultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +50,8 @@ import { ApiResultsComponent } from './api/api-results/api-results.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
 
 
   ],

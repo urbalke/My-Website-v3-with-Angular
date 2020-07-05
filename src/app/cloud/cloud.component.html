@@ -14,7 +14,7 @@
 <div class="cloud-wrap" *ngFor="let file of currentFiles | async" >
   <tr >
     <td (dblclick)="navigateUp(file.fileName, file.filePath, file.isDir, file.fileParent)">{{ file.fileName }}</td> 
-    <td>  Download  </td>
+    <a ><td (click)="downloadFile(file.fileName, file.filePath, file.isDir, file.fileParent)"> Download  </td></a>
     <td (dblclick)="deleteFile(file.fileName, file.filePath, file.isDir, file.fileParent)"> Delete </td>
   </tr>
 </div>
