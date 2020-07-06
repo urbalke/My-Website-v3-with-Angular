@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { CloudService } from '../services/cloud.service';
 import { Files } from '../files';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MenuItem } from 'primeng/api';
+
+
+
 
 @Component({
   selector: 'app-cloud',
@@ -13,18 +17,14 @@ export class CloudComponent implements OnInit {
   constructor(
     private CloudService: CloudService,
     private formBuilder: FormBuilder,
-    
+
   ) {}
 
   uploadForm: FormGroup;
-  fileUrl;
-  blob;
-
   currentFiles = new BehaviorSubject<Array<Files>>(null);
   workingDir = new BehaviorSubject<Files>(null);
 
-
-  
+contextMenu: MenuItem[];
 
   ngOnInit(): void {
     this.CloudService.obtainBase().subscribe((data) => {
@@ -39,6 +39,10 @@ export class CloudComponent implements OnInit {
     this.uploadForm = this.formBuilder.group({
       profile: [''],
     });
+    this.contextMenu =[
+      {label: 'test' }
+    ]
+    
   }
 
   navigateUp(fileName, filePath, isDir, fileParent) {
@@ -97,6 +101,8 @@ export class CloudComponent implements OnInit {
           a.click();
     
     });
-  
 }
+
+
+
 }

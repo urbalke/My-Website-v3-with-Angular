@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Files } from '../files';
 import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -78,4 +79,12 @@ downloadUrl = "http://127.0.0.1:5000/cloud/download"
 
     }, {responseType: 'blob'})
   }
+
+
+
+// 
+
+
+
+
 }

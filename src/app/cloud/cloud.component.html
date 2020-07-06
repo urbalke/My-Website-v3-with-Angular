@@ -5,26 +5,39 @@
 <hr />
 
 <div class="navigateDown">
-    <tr (dblclick)="navigateDown()">
-        <td>...</td> 
-      </tr>
-</div>
-
-
-<div class="cloud-wrap" *ngFor="let file of currentFiles | async" >
-  <tr >
-    <td (dblclick)="navigateUp(file.fileName, file.filePath, file.isDir, file.fileParent)">{{ file.fileName }}</td> 
-    <a ><td (click)="downloadFile(file.fileName, file.filePath, file.isDir, file.fileParent)"> Download  </td></a>
-    <td (dblclick)="deleteFile(file.fileName, file.filePath, file.isDir, file.fileParent)"> Delete </td>
+  <tr (dblclick)="navigateDown()">
+    <td>...</td>
   </tr>
 </div>
 
-
-        
-
+<div class="cloud-wrap" *ngFor="let file of currentFiles | async" >
+  <table>
+  <tr>
+    <td class="first" (dblclick)="
+        navigateUp(file.fileName, file.filePath, file.isDir, file.fileParent)
+      ">
+      {{ file.fileName }}
+    </td>
+    <td class="second" (dblclick)="
+        downloadFile(file.fileName, file.filePath, file.isDir, file.fileParent)
+      ">
+      <span class="material-icons">
+        get_app
+      </span>
+    </td>
+    <td class="third" (dblclick)="
+        deleteFile(file.fileName, file.filePath, file.isDir, file.fileParent)
+      ">
+      <span class="material-icons">
+        delete
+      </span>
+    </td>
+  </tr>
+</table>
+<hr>
+</div>
 
 <div>
-
   <form [formGroup]="uploadForm" (ngSubmit)="uploadSelectedFile()">
     <div>
       <input type="file" name="profile" (change)="onFileSelect($event)" />
@@ -33,7 +46,5 @@
       <button type="submit">Upload</button>
     </div>
   </form>
-
-
 </div>
-   
+

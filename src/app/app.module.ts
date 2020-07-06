@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +26,8 @@ import { LoginTestComponent } from './login/login-test/login-test.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginService } from './services/login.service';
 import { ApiResultsComponent } from './api/api-results/api-results.component';
+import { ContextMenuModule } from 'primeng/contextmenu';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +47,9 @@ import { ApiResultsComponent } from './api/api-results/api-results.component';
     RegisterComponent,
     LoginTestComponent,
     ApiResultsComponent,
+
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -51,6 +58,11 @@ import { ApiResultsComponent } from './api/api-results/api-results.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    ContextMenuModule,
+
+    
 
 
 

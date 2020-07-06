@@ -1,0 +1,13 @@
+table { width:100%; padding-top: 0%; padding-bottom: 0%;}
+.first { width:90%; }
+.second { text-align:right; width: 5%; }
+.third { text-align:right; width: 5%;}
+
+hr {
+   
+
+    color: gray;
+    display: block;
+
+    margin: 1px ;
+}
