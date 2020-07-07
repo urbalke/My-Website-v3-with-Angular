@@ -3,7 +3,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { CloudService } from '../services/cloud.service';
 import { Files } from '../files';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
+
 
 
 
@@ -19,12 +19,13 @@ export class CloudComponent implements OnInit {
     private formBuilder: FormBuilder,
 
   ) {}
+ 
+
 
   uploadForm: FormGroup;
   currentFiles = new BehaviorSubject<Array<Files>>(null);
   workingDir = new BehaviorSubject<Files>(null);
 
-contextMenu: MenuItem[];
 
   ngOnInit(): void {
     this.CloudService.obtainBase().subscribe((data) => {
@@ -39,9 +40,10 @@ contextMenu: MenuItem[];
     this.uploadForm = this.formBuilder.group({
       profile: [''],
     });
-    this.contextMenu =[
-      {label: 'test' }
-    ]
+
+    window.addEventListener("click",function(){
+      document.getElementById("context-menu").classList.remove("active");
+    });
     
   }
 
@@ -103,6 +105,19 @@ contextMenu: MenuItem[];
     });
 }
 
+menu(fileName, filePath, isDir, fileParent, event){
+event.preventDefault();
+    let x = event.clientX;
+    let y = event.clientY;
+   let contextElement = document.getElementById("context-menu");
+    contextElement.style.top = event.screenY - 135 + "px";
+    contextElement.style.left = event.screenX + "px";
+    contextElement.classList.add("active");
+}
 
+
+test() {
+ 
+}
 
 }
