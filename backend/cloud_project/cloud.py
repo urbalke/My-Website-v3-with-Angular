@@ -88,7 +88,7 @@ class CloudObtain(Resource):
 
         if filePath == 'root' and command == None:
             contents = []
-            with os.scandir('/home/patryk/anaconda3/envs/Angular-Flask/MyWebsite/userfiles') as it:
+            with os.scandir(os.getcwd()+"/userfiles") as it:
                 for entry in it:
                     if not entry.name.startswith('.'):
                         path = Path(str(entry.path))

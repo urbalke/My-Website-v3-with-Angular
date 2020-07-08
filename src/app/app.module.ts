@@ -27,6 +27,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { LoginService } from './services/login.service';
 import { ApiResultsComponent } from './api/api-results/api-results.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { ContextMenuComponent } from './cloud/context-menu/context-menu.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
     RegisterComponent,
     LoginTestComponent,
     ApiResultsComponent,
+    ContextMenuComponent,
 
     
     
@@ -67,7 +69,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 
 
   ],
-  providers: [BlogService, AuthGuard, LoginService],
+  providers: [BlogService, AuthGuard, LoginService, ContextMenuComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

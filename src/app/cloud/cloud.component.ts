@@ -9,6 +9,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
+  host: {
+    '(document:click)': 'disableContextMenu()',
+  },
   selector: 'app-cloud',
   templateUrl: './cloud.component.html',
   styleUrls: ['./cloud.component.css'],
@@ -20,7 +23,9 @@ export class CloudComponent implements OnInit {
 
   ) {}
  
-
+  contextmenu = false;
+  contextmenuX = 0;
+  contextmenuY = 0;
 
   uploadForm: FormGroup;
   currentFiles = new BehaviorSubject<Array<Files>>(null);
@@ -39,10 +44,6 @@ export class CloudComponent implements OnInit {
     })
     this.uploadForm = this.formBuilder.group({
       profile: [''],
-    });
-
-    window.addEventListener("click",function(){
-      document.getElementById("context-menu").classList.remove("active");
     });
     
   }
@@ -105,19 +106,17 @@ export class CloudComponent implements OnInit {
     });
 }
 
-menu(fileName, filePath, isDir, fileParent, event){
-event.preventDefault();
-    let x = event.clientX;
-    let y = event.clientY;
-   let contextElement = document.getElementById("context-menu");
-    contextElement.style.top = event.screenY - 135 + "px";
-    contextElement.style.left = event.screenX + "px";
-    contextElement.classList.add("active");
+
+
+onrightClick(event) {
+  event.preventDefault();
+  this.contextmenuX = event.clientX;
+  this.contextmenuY = event.clientY;
+  this.contextmenu = true;
 }
-
-
-test() {
- 
+//disables the menu
+disableContextMenu() {
+  this.contextmenu = false;
 }
 
 }

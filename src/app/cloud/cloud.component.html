@@ -1,4 +1,4 @@
-<div class="cloud-page">
+<div class="cloud-page" >
 <h1>Cloud Service:</h1>
 <p>
   For now you don't have to log in, just testing capabilities of handmade cloud.
@@ -11,7 +11,7 @@
   </tr>
 </div>
 
-<div class="cloud-wrap" *ngFor="let file of currentFiles | async" (contextmenu)="menu(file.fileName, file.filePath, file.isDir, file.fileParent, $event)">
+<div class="cloud-wrap" *ngFor="let file of currentFiles | async" (contextmenu)="onrightClick($event)">
   <table>
   <tr>
     <td class="first"  (dblclick)="
@@ -49,27 +49,10 @@
   </form>
 </div>
 
-<div id="context-menu">
-  <div class="item">
-    <i class="fa fa-cut" (click)="test()" ></i> Download
-  </div>
-  <div class="item">
-    <i class="fa fa-clone"></i> Copy
-  </div>
-  <div class="item">
-    <i class="fa fa-paste"></i> Paste
-  </div>
-  <div class="item">
-    <i class="fa fa-trash-o"></i> Delete
-  </div>
-  <hr>
-  <div class="item">
-    <i class="fa fa-refresh"></i> Reload
-  </div>
-  <div class="item">
-    <i class="fa fa-times"></i> Exit
-  </div>
-</div>
-</div>
 
-<span class="context-menu-one btn btn-neutral" (contextmenu)="test()">right click me</span>
+
+
+  <div *ngIf="contextmenu==true">
+      <app-context-menu [x]="contextmenuX" [y]="contextmenuY"></app-context-menu>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/patryk/anaconda3/envs/Angular-Flask/bin/python",
+    "python.pythonPath": "/home/purba/Projects/My-Website/bin/python3",
     "sqltools.connections": [
         {
             "database": "${workspaceFolder:MyWebsite}/backend/blog_project/blog.py",
