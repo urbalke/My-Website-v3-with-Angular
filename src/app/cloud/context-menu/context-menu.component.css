@@ -1,4 +1,34 @@
 .contextmenu{
     position: absolute;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  border-radius:5px;
+  width:150px;
+  transform:scale(1);
+  transform-origin:top left;
+  background: #343a40;
+  transition:transform 300ms ease-in-out;
+
+}
+
+.item {
+  padding:8px 10px;
+  font-size:15px;
+  color:#eee;
+}
+.item:hover {
+  background:#555;
+}
+.item i {
+  display:inline-block;
+  margin-right:5px;
+}
+hr {
+  margin:2px 0px;
+  border-color:#555;
+}
+
+
+body {
+  margin:0px;
+  font-family:"Open Sans",sans-serif;
 }

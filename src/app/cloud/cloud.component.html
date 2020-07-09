@@ -11,7 +11,7 @@
   </tr>
 </div>
 
-<div class="cloud-wrap" *ngFor="let file of currentFiles | async" (contextmenu)="onrightClick($event)">
+<div class="cloud-wrap" *ngFor="let file of currentFiles | async" (contextmenu)="onrightClick($event, file)">
   <table>
   <tr>
     <td class="first"  (dblclick)="
@@ -53,6 +53,6 @@
 
 
   <div *ngIf="contextmenu==true">
-      <app-context-menu [x]="contextmenuX" [y]="contextmenuY"></app-context-menu>
+      <app-context-menu [file]="file" [x]="contextmenuX" [y]="contextmenuY" [currentFiles]="currentFiles" [workingDir]="workingDir"></app-context-menu>
   </div>
 </div>

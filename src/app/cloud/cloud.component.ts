@@ -26,6 +26,8 @@ export class CloudComponent implements OnInit {
   contextmenu = false;
   contextmenuX = 0;
   contextmenuY = 0;
+  
+  file: any;
 
   uploadForm: FormGroup;
   currentFiles = new BehaviorSubject<Array<Files>>(null);
@@ -108,11 +110,14 @@ export class CloudComponent implements OnInit {
 
 
 
-onrightClick(event) {
+onrightClick(event, file) {
   event.preventDefault();
   this.contextmenuX = event.clientX;
   this.contextmenuY = event.clientY;
   this.contextmenu = true;
+  this.file = file
+  console.log(this.file);  
+  
 }
 //disables the menu
 disableContextMenu() {
