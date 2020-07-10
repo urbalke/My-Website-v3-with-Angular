@@ -1,15 +1,15 @@
 <div class="contextmenu" [ngStyle]="{'left.px': x, 'top.px': y}">
-    <div class="item">
+    <div class="item" (click)="navigateUp()">
       <i ></i> Navigate Up
     </div>
-    <div class="item">
+    <div class="item" (click)="navigateDown()">
       <i></i> Navigate Down
     </div>
     <hr>
     <div class="item" (click)="downloadFile()">
       <i ></i> Download
     </div>
-    <div class="item">
+    <div class="item" (click)="deleteFile()">
       <i ></i> Delete
     </div>
   </div>

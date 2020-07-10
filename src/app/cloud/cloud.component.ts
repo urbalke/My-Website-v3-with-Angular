@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { CloudService } from '../services/cloud.service';
 import { Files } from '../files';
@@ -40,8 +40,8 @@ export class CloudComponent implements OnInit {
     });
     this.workingDir.next({
       fileName: "userfiles",
-      filePath: "/home/patryk/anaconda3/envs/Angular-Flask/MyWebsite/userfiles",
-      fileParent: "/home/patryk/anaconda3/envs/Angular-Flask/MyWebsite/userfiles",
+      filePath: "/home/purba/Projects/My-Website/My-Website-v3-with-Angular/userfiles",
+      fileParent: "/home/purba/Projects/My-Website/My-Website-v3-with-Angular/userfiles",
       isDir: true,
     })
     this.uploadForm = this.formBuilder.group({
@@ -90,12 +90,11 @@ export class CloudComponent implements OnInit {
 
   refreshContents(){
     this.CloudService.currentDirContents(this.workingDir.value).subscribe(data =>
-      this.currentFiles.next(data))
+      this.currentFiles.next(data));
   }
 
   deleteFile(fileName, filePath, isDir, fileParent) {
-    this.CloudService.deleteFile(fileName, filePath, isDir, fileParent).subscribe();
-      this.refreshContents();
+    this.CloudService.deleteFile(fileName, filePath, isDir, fileParent).subscribe(()=> this.refreshContents());
   }
 
   downloadFile(fileName, filePath, isDir, fileParent) {
@@ -110,18 +109,31 @@ export class CloudComponent implements OnInit {
 
 
 
-onrightClick(event, file) {
-  event.preventDefault();
-  this.contextmenuX = event.clientX;
-  this.contextmenuY = event.clientY;
-  this.contextmenu = true;
-  this.file = file
-  console.log(this.file);  
+  onrightClick(event, file) {
+      event.preventDefault();
+      this.contextmenuX = event.clientX;
+      this.contextmenuY = event.clientY;
+      this.contextmenu = true;
+      this.file = file
+     
   
 }
 //disables the menu
-disableContextMenu() {
-  this.contextmenu = false;
+    disableContextMenu() {
+      this.contextmenu = false;
+}
+
+workingDirHandler(file){
+  this.workingDir.next(file);
+  console.log(file)
+}
+
+currentFilesHandler(files){
+  this.currentFiles.next(files);
+  
+}
+refreshHandler(event){
+  this.refreshContents();
 }
 
 }

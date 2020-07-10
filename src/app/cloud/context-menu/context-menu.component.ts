@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Files } from 'src/app/files';
 import { CloudService } from 'src/app/services/cloud.service';
+import { CloudComponent } from '../cloud.component';
+
 
 @Component({
   selector: 'app-context-menu',
@@ -14,21 +16,23 @@ export class ContextMenuComponent implements OnInit {
   ngOnInit() {
     
   }
-    @Input() x=0;
+  @Input() x=0;
   @Input() y=0;
   @Input() file: Files;
   @Input() currentFiles;
   @Input() workingDir;
-
+  @Output() workingDirChange = new EventEmitter<Files>();
+  @Output() currentFilesChange = new EventEmitter<Array<Files>>();
+  @Output() refresh = new EventEmitter<any>();
 
   
-  navigateUp(fileName, filePath, isDir, fileParent) {
-    this.CloudService.navUp(fileName, filePath, isDir, fileParent).subscribe(
+  navigateUp() {
+    this.CloudService.navUp(this.file.fileName, this.file.filePath, this.file.isDir, this.file.fileParent).subscribe(
       (data) => {
         this.currentFiles.next(data);
-        this.workingDir.next({fileName, filePath, isDir, fileParent});
       }
     );
+    this.workingDirChange.emit(this.file);
   }
 
   navigateDown() {
@@ -39,14 +43,11 @@ export class ContextMenuComponent implements OnInit {
   }
 
 
-  refreshContents(){
-    this.CloudService.currentDirContents(this.workingDir.value).subscribe(data =>
-      this.currentFiles.next(data))
-  }
 
-  deleteFile(fileName, filePath, isDir, fileParent) {
-    this.CloudService.deleteFile(fileName, filePath, isDir, fileParent).subscribe();
-      this.refreshContents();
+  deleteFile() {
+    this.workingDirChange.emit(this.file);
+    this.CloudService.deleteFile(this.file.fileName, this.file.filePath, this.file.isDir, this.file.fileParent).subscribe();
+    this.refresh.emit(null);
   }
 
   downloadFile() {
@@ -58,4 +59,6 @@ export class ContextMenuComponent implements OnInit {
     
     });
 }
+
+
 }

@@ -102,7 +102,7 @@ class CloudObtain(Resource):
 
         elif command == 'obtainFiles':
             contents = []
-            if (isDir == 'true' or 'True' or True):
+            if isDir == True:
                 with os.scandir(filePath) as it:
                     for entry in it:
                         if not entry.name.startswith('.'):
